@@ -1,0 +1,11 @@
+.align {
+  position: absolute;
+  top: 250px;
+  left: 550px;
+}
+.settingsicon {
+  position: relative;
+  display: block;
+  bottom: 120px;
+  left: 710px;
+}

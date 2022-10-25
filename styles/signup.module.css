@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@1,200&family=Outfit:wght@400;700&display=swap");
+
+.signup {
+  padding: 50px;
+  display: inline-block;
+  position: relative;
+  bottom: 470px;
+  left: 270px;
+  background-color: #f6fbf9;
+  border-radius: 40px;
+  width: 400px;
+  height: 500px;
+  text-align: center;
+}
+.input {
+  font-family: "Karla", sans-serif;
+  font-family: "Outfit", sans-serif;
+  width: 250px;
+  height: 60px;
+  border: none;
+  border-radius: 7px;
+  padding-left: 50px;
+  margin-bottom: 20px;
+}
+.btn {
+  font-family: "Karla", sans-serif;
+  font-family: "Outfit", sans-serif;
+  font-size: 20px;
+  margin-top: -20px;
+  border: white;
+  background-color: #84c7ae;
+  width: 250px;
+  height: 60px;
+  border-radius: 20px;
+  text-decoration-line: underline;
+}
+
+.gitam {
+  position: relative;
+  bottom: 500px;
+  width: 200px;
+  float: left;
+}
+
+.student {
+  position: relative;
+  bottom: 510px;
+  width: 100px;
+  float: right;
+}
+
+.box1 {
+  width: 500px;
+  height: 500px;
+  background-color: #c1e3d6;
+  border-radius: 100px;
+  transform: rotate(50deg);
+  display: inline-block;
+  position: relative;
+  bottom: 150px;
+  right: 150px;
+}
+.box2 {
+  width: 500px;
+  height: 500px;
+  background-color: #c1e3d6;
+  border-radius: 100px;
+  transform: rotate(50deg);
+  display: inline-block;
+  position: relative;
+  top: 400px;
+  left: 600px;
+}
+
+.a {
+  color: black;
+}

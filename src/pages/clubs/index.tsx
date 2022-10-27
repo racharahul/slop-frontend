@@ -17,103 +17,13 @@ import {
 import React from "react";
 import { AuthContext } from "../../components/authProvider";
 import AuthComponent from "../../components/layout/authComp";
+import Header from "../../components/layout/header";
 
 function Clubs() {
   const authContext = React.useContext(AuthContext);
   const widget = (
     <div className="root">
-      <nav className="navbar bg-light p-0">
-        <div className="container-fluid p-0">
-          <Link href="#">
-            <a>
-              <Image src={student} alt="student" height="60" width="60"></Image>
-            </a>
-          </Link>
-
-          {/* Dropdown Menu */}
-          <div className="btn-group">
-            <button
-              className="btn btn-light btn-lg dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Clubs
-            </button>
-            <ul className="dropdown-menu">
-              <li>
-                <Link href="../home">
-                  <a className="dropdown-item">Home</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="../clubs">
-                  <a className="dropdown-item">Clubs</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="../events">
-                  <a className="dropdown-item">Events</a>
-                </Link>
-              </li>
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
-              <li>
-                <Link href="../profile">
-                  <a className="dropdown-item">Profile</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="../settings">
-                  <a className="dropdown-item">Settings</a>
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Search Bar */}
-          <nav className="navbar bg-light">
-            <div className="container-fluid">
-              <form className="d-flex px-5" role="search">
-                <input
-                  className="form-control me-2"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <button className="btn btn-outline-success" type="submit">
-                  Search
-                </button>
-              </form>
-            </div>
-          </nav>
-
-          <div className="btn-group">
-            <button
-              className="btn btn-light btn-lg dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <Image src={user} alt="profile" width="30" height="30"></Image>
-            </button>
-            <ul className="dropdown-menu">
-              <li>
-                <a
-                  className="dropdown-item"
-                  onClick={() => {
-                    authContext.setAuthState(undefined);
-                  }}
-                >
-                  Logout
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
+      <Header pageName={"Clubs"} />
       {/* Body start */}
 
       <style jsx>{`

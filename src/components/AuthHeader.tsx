@@ -1,12 +1,12 @@
 import React from "react";
 import Image from "next/image";
-import { GitamLogo, StudentLifeLogo } from "../components/assets";
+import { GitamLogo, StudentLifeLogo } from "./assets";
 type Prop = {
   style: {
     readonly [key: string]: string;
   };
 };
-const Header: React.FC<Prop> = ({ style }) => {
+const AuthHeader: React.FC<Prop> = ({ style }) => {
   return (
     <div>
       <div className={style.gitam}>
@@ -29,4 +29,4 @@ const Header: React.FC<Prop> = ({ style }) => {
   );
 };
 
-export default Header;
+export default AuthHeader;

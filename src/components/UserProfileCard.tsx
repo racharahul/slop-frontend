@@ -12,7 +12,7 @@ import {
   icon,
 } from "@fortawesome/fontawesome-svg-core/import.macro";
 import style from "../../styles/profile.module.css";
-import { AdminVerified } from "./assets";
+import { AdminVerified, ClubVerified } from "./assets";
 import React from "react";
 import { AuthContext } from "./authProvider";
 import User, { toUser } from "../data/User";
@@ -55,20 +55,27 @@ const UserProfileCard: React.FC = () => {
           <div className="card-body">
             <p className="fs-3">
               {user.fullName}
-              <Image
-                src={AdminVerified}
-                alt="verified"
-                height={20}
-                width={20}
-              />
+              {user.userRole !== "USER" ? (
+                <Image
+                  src={user.userRole === "CLUB" ? ClubVerified : AdminVerified}
+                  alt="verified"
+                  height={20}
+                  width={20}
+                  color="blue"
+                />
+              ) : (
+                <></>
+              )}
             </p>
             <p className="card-title">{user.bio}</p>
             <Link href="../settings">
-              <FontAwesomeIcon
-                className={style.settingsicon}
-                icon={solid("gear")}
-                size="1x"
-              />
+              <a style={{ color: "black" }}>
+                <FontAwesomeIcon
+                  className={style.settingsicon}
+                  icon={solid("gear")}
+                  size="1x"
+                />
+              </a>
             </Link>
           </div>
         </div>

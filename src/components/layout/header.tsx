@@ -6,13 +6,13 @@ import { AuthContext } from "../authProvider";
 import User, { toUser } from "../../data/User";
 import api from "../../util/api";
 
-const Header: React.FC = () => {
+const Header: React.FC<{ pageName: string }> = ({ pageName }) => {
   const authContext = React.useContext(AuthContext);
 
   return (
     <nav className="navbar bg-light p-0">
       <div className="container-fluid p-0">
-        <Link href="#">
+        <Link href="/home">
           <a>
             <Image
               src={StudentLifeLogo}
@@ -31,7 +31,7 @@ const Header: React.FC = () => {
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Profile
+            {pageName}
           </button>
           <ul className="dropdown-menu">
             <li>

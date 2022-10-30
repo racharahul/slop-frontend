@@ -6,15 +6,14 @@ const EventCard: React.FC<{ event: Event }> = ({ event }) => {
     <div className="card m-5">
       <style jsx>{`
         .card{
-          
-          width:25rem;
+          width:90hw;
         }
       }
     `}</style>
 
       <div
         className=" text-bg mb-2 m-2"
-        style={{ width: "70", textAlign: "center" }}
+        // style={{ width: "1000", textAlign: "center" }}
       >
         <div className="card-header">{event.clubName}</div>
         <div className="card-body">

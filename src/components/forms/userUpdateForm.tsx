@@ -11,7 +11,15 @@ const UpdateUserForm: React.FC<{ user: User }> = ({ user }) => {
   const router = useRouter();
   const [fullName, setFullName] = React.useState<string>(user.fullName);
   const [bio, setBio] = React.useState<string>(user.bio);
+  const [err, setErr] = React.useState<string | undefined>();
   const onSubmit = async () => {
+    if (!fullName) {
+      setErr("Full name should not be empty!");
+      return;
+    } else if (/\d/.test(fullName)) {
+      setErr("Fullname should not contain a number");
+      return;
+    }
     console.log(authContext.authState);
     const res = await api.patch(
       `/users/${user.id}`,
@@ -21,6 +29,7 @@ const UpdateUserForm: React.FC<{ user: User }> = ({ user }) => {
       }
     );
     if (res.status === 200) await router.reload();
+    setErr(undefined);
   };
   const widget = (
     <div className="card m-5">
@@ -36,7 +45,7 @@ const UpdateUserForm: React.FC<{ user: User }> = ({ user }) => {
           defaultValue={fullName}
           onChange={(e) => {
             const { value } = e.target;
-            setFullName(value);
+            setFullName(value.trim());
           }}
         />
 
@@ -55,7 +64,7 @@ const UpdateUserForm: React.FC<{ user: User }> = ({ user }) => {
             }}
           />
         </div>
-
+        {err ? <p style={{ color: "red" }}>{err}</p> : <></>}
         <button type="submit" className="btn btn-primary" onClick={onSubmit}>
           Submit
         </button>

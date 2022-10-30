@@ -23,6 +23,7 @@ const SignUpForm: React.FC<Prop> = ({ style }) => {
     emailId: "",
     password: "",
   });
+  const [loading, setLoading] = React.useState<boolean>(false);
   const [err, setErr] = React.useState("");
   const validateData = async (data: FormType) => {
     const validity = await signUpFormValidation.isValid(data);
@@ -31,6 +32,11 @@ const SignUpForm: React.FC<Prop> = ({ style }) => {
     } catch (e: unknown) {
       if (e instanceof ValidationError) setErr(e.errors[0]);
     }
+    if (/\d/.test(formVal.fullName)) {
+      setErr("Fullname should not contain a number");
+      return false;
+    }
+
     return validity;
   };
   const onSubmit = async () => {
@@ -98,8 +104,24 @@ const SignUpForm: React.FC<Prop> = ({ style }) => {
       {err ? <div className="error-text">{err}</div> : <></>}
       <br />
 
-      <button className={style.btn} onClick={onSubmit}>
-        Create Account
+      <button
+        className={style.btn}
+        onClick={async () => {
+          setLoading(true);
+          await onSubmit();
+          setLoading(false);
+        }}
+        disabled={loading}
+      >
+        {loading ? (
+          <span
+            className="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          />
+        ) : (
+          "Create Account"
+        )}
       </button>
       <p>
         Already Have An Account?

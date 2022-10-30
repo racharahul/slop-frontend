@@ -22,6 +22,7 @@ const SignInForm: React.FC<Prop> = ({ style }) => {
     emailId: "",
     password: "",
   });
+  const [loading, setLoading] = React.useState<boolean>(false);
   const [err, setErr] = React.useState("");
   const validate = async (data: FormType) => {
     const isValid = await signInFormValidation.isValid(data);
@@ -64,8 +65,24 @@ const SignInForm: React.FC<Prop> = ({ style }) => {
       <br />
       <div className="error-text">{err}</div>
       <br />
-      <button className={style.btn} onClick={onSubmit}>
-        Sign In
+      <button
+        className={style.btn}
+        onClick={async () => {
+          setLoading(true);
+          await onSubmit();
+          setLoading(false);
+        }}
+        disabled={loading}
+      >
+        {loading ? (
+          <span
+            className="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          />
+        ) : (
+          "Sign In"
+        )}
       </button>
 
       <p>

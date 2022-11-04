@@ -22,7 +22,7 @@ import Header from "../../components/layout/header";
 function Clubs() {
   const authContext = React.useContext(AuthContext);
   const widget = (
-    <div className="root">
+    <div className="root" style={{ margin: "100px" }}>
       <Header pageName={"Clubs"} />
       {/* Body start */}
 

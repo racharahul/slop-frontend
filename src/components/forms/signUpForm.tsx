@@ -15,6 +15,7 @@ type FormType = {
   registrationId: string;
   emailId: string;
   password: string;
+  phoneNumber: string;
 };
 const SignUpForm: React.FC<Prop> = ({ style }) => {
   const [formVal, setFormVal] = React.useState<FormType>({
@@ -22,6 +23,7 @@ const SignUpForm: React.FC<Prop> = ({ style }) => {
     registrationId: "",
     emailId: "",
     password: "",
+    phoneNumber: "",
   });
   const [loading, setLoading] = React.useState<boolean>(false);
   const [err, setErr] = React.useState("");
@@ -69,6 +71,19 @@ const SignUpForm: React.FC<Prop> = ({ style }) => {
           const value = e.target.value;
           setFormVal((prevFormVal) => {
             prevFormVal.registrationId = value;
+            return prevFormVal;
+          });
+        }}
+      />
+      <br />
+      <input
+        className={style.input}
+        type="text"
+        placeholder="Mobile Number"
+        onChange={(e) => {
+          const { value } = e.target;
+          setFormVal((prevFormVal) => {
+            prevFormVal.phoneNumber = value;
             return prevFormVal;
           });
         }}

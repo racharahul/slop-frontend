@@ -37,7 +37,7 @@ function Events() {
       });
   }, []);
   const widget = (
-    <div className="root">
+    <div className="root" style={{ margin: "100px" }}>
       <Header pageName={"Events"} />
       {events.map((e) => (
         <EventCard event={e} key={e.id} />

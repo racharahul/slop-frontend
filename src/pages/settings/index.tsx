@@ -37,7 +37,7 @@ function Settings() {
   const widget = loading ? (
     <>{loading}</>
   ) : (
-    <div className="root">
+    <div className="root" style={{ margin: "100px" }}>
       <Header pageName={"Settings"} />
       <UpdateUserForm user={user} />
     </div>

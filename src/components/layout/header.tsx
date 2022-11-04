@@ -10,7 +10,7 @@ const Header: React.FC<{ pageName: string }> = ({ pageName }) => {
   const authContext = React.useContext(AuthContext);
 
   return (
-    <nav className="navbar bg-light p-0">
+    <nav className="navbar bg-light p-0 fixed-top">
       <div className="container-fluid p-0">
         <Link href="/home">
           <a>

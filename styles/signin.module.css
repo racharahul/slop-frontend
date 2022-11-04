@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@1,200&family=Outfit:wght@400;700&display=swap");
 
 .signin {
-  padding: 30px;
+  padding: 80px;
   display: inline-block;
   position: relative;
-  bottom: 470px;
-  left: 270px;
+  bottom: 50vh;
+  left: 45vh;
   background-color: #f6fbf9;
   border-radius: 40px;
   width: 400px;

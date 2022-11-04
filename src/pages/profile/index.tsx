@@ -22,7 +22,7 @@ import UserProfileCard from "../../components/UserProfileCard";
 function Profile() {
   const authContext = React.useContext(AuthContext);
   const widget = (
-    <div className="root">
+    <div className="root" style={{ margin: "100px" }}>
       <Header pageName={"Profile"} />
       {/* Profile Card */}
       <UserProfileCard />

@@ -18,33 +18,32 @@ import api from "../../util/api";
 import { toEventList } from "../../data/Event";
 import Event from "../../data/Event";
 import EventCard from "../../components/eventCard";
+import { NextPage } from "next";
 
-function Events() {
+const EventsPage: NextPage = () => {
   const authContext = React.useContext(AuthContext);
   const [events, setEvents] = React.useState<Event[]>([]);
   React.useEffect(() => {
-    fetch("/data")
-      .then((res) => {
-        return res.json();
+    api
+      .get("/events", {
+        headers: { Authorization: "Bearer " + authContext.authState },
       })
       .then((res) => {
-        const data = JSON.parse(res);
-        const eventsRes = toEventList(data.data);
-        console.log(eventsRes);
-        setEvents((p) => {
-          return [...eventsRes];
-        });
+        console.log("Res ", res.data);
+        const events: Event[] = toEventList(res.data);
+        console.log("Converted Object", events);
+        setEvents(events);
       });
   }, []);
   const widget = (
     <div className="root" style={{ margin: "100px" }}>
       <Header pageName={"Events"} />
       {events.map((e) => (
-        <EventCard event={e} key={e.id} />
+        <EventCard event={e} key={e.id} setEvents={setEvents} />
       ))}
     </div>
   );
   return <AuthComponent child={widget} />;
-}
+};
 
-export default Events;
+export default EventsPage;

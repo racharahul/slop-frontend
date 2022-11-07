@@ -1,4 +1,7 @@
 {
   "presets": ["next/babel"],
-  "plugins": ["macros"]
+  "plugins": [
+    "macros",
+    ["@babel/plugin-proposal-decorators", { "legacy": true }]
+  ]
 }

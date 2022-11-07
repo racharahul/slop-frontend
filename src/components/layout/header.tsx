@@ -5,12 +5,19 @@ import { StudentLifeLogo, UserIcon } from "../assets";
 import { AuthContext } from "../authProvider";
 import User, { toUser } from "../../data/User";
 import api from "../../util/api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  solid,
+  regular,
+  brands,
+  icon,
+} from "@fortawesome/fontawesome-svg-core/import.macro";
 
 const Header: React.FC<{ pageName: string }> = ({ pageName }) => {
   const authContext = React.useContext(AuthContext);
 
   return (
-    <nav className="navbar bg-light p-0 fixed-top">
+    <nav className="navbar navbar-expand-sm bg-light p-0 fixed-top">
       <div className="container-fluid p-0">
         <Link href="/home">
           <a>
@@ -24,7 +31,8 @@ const Header: React.FC<{ pageName: string }> = ({ pageName }) => {
         </Link>
 
         {/* Dropdown Menu */}
-        <div className="btn-group">
+
+        <div className="btn-group border border-dark rounded">
           <button
             className="btn btn-light btn-lg dropdown-toggle"
             type="button"
@@ -35,17 +43,17 @@ const Header: React.FC<{ pageName: string }> = ({ pageName }) => {
           </button>
           <ul className="dropdown-menu">
             <li>
-              <Link href="../home">
+              <Link href="/home">
                 <a className="dropdown-item">Home</a>
               </Link>
             </li>
             <li>
-              <Link href="../clubs">
+              <Link href="/clubs">
                 <a className="dropdown-item">Clubs</a>
               </Link>
             </li>
             <li>
-              <Link href="../events">
+              <Link href="/events">
                 <a className="dropdown-item">Events</a>
               </Link>
             </li>
@@ -53,12 +61,12 @@ const Header: React.FC<{ pageName: string }> = ({ pageName }) => {
               <hr className="dropdown-divider" />
             </li>
             <li>
-              <Link href="../profile">
+              <Link href="/profile">
                 <a className="dropdown-item">Profile</a>
               </Link>
             </li>
             <li>
-              <Link href="../settings">
+              <Link href="/settings">
                 <a className="dropdown-item">Settings</a>
               </Link>
             </li>
@@ -68,7 +76,7 @@ const Header: React.FC<{ pageName: string }> = ({ pageName }) => {
         {/* Search Bar */}
         <nav className="navbar bg-light">
           <div className="container-fluid">
-            <form className="d-flex px-5" role="search">
+            <form className="d-flex px-5" role="search" style={{}}>
               <input
                 className="form-control me-2"
                 type="search"
@@ -82,7 +90,17 @@ const Header: React.FC<{ pageName: string }> = ({ pageName }) => {
           </div>
         </nav>
 
+        {/* Create a POST */}
         <div className="btn-group">
+          <Link href="/clubs/submit">
+            <button className="btn btn-light btn-lg" type="button">
+              <FontAwesomeIcon icon={solid("square-plus")} />
+            </button>
+          </Link>
+        </div>
+
+        {/* PROFILE  */}
+        <div className="btn-group ">
           <button
             className="btn btn-light btn-lg dropdown-toggle"
             type="button"
@@ -92,6 +110,9 @@ const Header: React.FC<{ pageName: string }> = ({ pageName }) => {
             <Image src={UserIcon} alt="profile" width="30" height="30"></Image>
           </button>
           <ul className="dropdown-menu">
+            <li>
+              <a className="dropdown-item">Upgrade to CLUB</a>
+            </li>
             <li>
               <a
                 className="dropdown-item"

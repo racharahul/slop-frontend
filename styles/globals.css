@@ -8,8 +8,8 @@ body {
 .auth-background {
   background-color: #84c7ae;
   position: absolute;
-  top: 0;
-  left: 0;
+  /* top: 0;
+  left: 0; */
   height: 100%;
   width: 100%;
   font-family: "Karla", sans-serif;

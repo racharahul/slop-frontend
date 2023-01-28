@@ -48,7 +48,10 @@ const SignUpForm: React.FC<Prop> = ({ style }) => {
     else setErr(res.data.message);
   };
   return (
-    <div className={style.signup}>
+    <div
+      className="rounded-4 p-5 text-center"
+      style={{ backgroundColor: "#f6fbf9" }}
+    >
       <h1>Create An Account</h1>
       <input
         className={style.input}

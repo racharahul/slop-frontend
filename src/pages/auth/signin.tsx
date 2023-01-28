@@ -6,10 +6,15 @@ import AuthComponent from "../../components/layout/authComp";
 function Signin() {
   const widget = (
     <div className="auth-background">
-      <div className={style.box1}></div>
-      <div className={style.box2}></div>
-      <AuthHeader style={style} />
-      <SignInForm style={style} />
+      {/* <AuthHeader style={style} /> */}
+      {/* <div className={style.box1} /> */}
+      {/* <div className={style.box2} /> */}
+      <div
+        className="container-fluid d-flex justify-content-center align-items-center"
+        style={{ height: "100%", width: "100%" }}
+      >
+        <SignInForm style={style} />
+      </div>
     </div>
   );
   return <AuthComponent child={widget} fromAuth={true} />;

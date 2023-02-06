@@ -72,6 +72,7 @@ function Clubs() {
             <Image className="card-img-top" src={gusac} alt="Card image cap" />
             <div className="card-body">
               <h5 className="card-title">Gusac</h5>
+              {/* eslint-disable-next-line react/no-unescaped-entities */}
               <p className="card-text">“तमसो मा ज्योतिर्गमय"</p>
               <a href="#" className="btn btn-light">
                 More

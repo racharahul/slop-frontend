@@ -38,6 +38,7 @@ function Settings() {
     <>{loading}</>
   ) : (
     <div className="root" style={{ margin: "100px" }}>
+      <title>Settings</title>
       <Header pageName={"Settings"} />
       <UpdateUserForm user={user} />
     </div>

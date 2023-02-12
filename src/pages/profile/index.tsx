@@ -23,6 +23,7 @@ function Profile() {
   const authContext = React.useContext(AuthContext);
   const widget = (
     <div className="root" style={{ margin: "100px" }}>
+      <title>Profile</title>
       <Header pageName={"Profile"} />
       {/* Profile Card */}
       <UserProfileCard />

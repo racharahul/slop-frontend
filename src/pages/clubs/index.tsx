@@ -23,6 +23,7 @@ function Clubs() {
   const authContext = React.useContext(AuthContext);
   const widget = (
     <div className="root" style={{ margin: "100px" }}>
+      <title>Clubs</title>
       <Header pageName={"Clubs"} />
       {/* Body start */}
 

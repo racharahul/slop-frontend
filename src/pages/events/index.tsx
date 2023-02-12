@@ -37,6 +37,7 @@ const EventsPage: NextPage = () => {
   }, []);
   const widget = (
     <div className="root" style={{ margin: "100px" }}>
+      <title>Events</title>
       <Header pageName={"Events"} />
       {events.map((e) => (
         <EventCard event={e} key={e.id} setEvents={setEvents} />

@@ -8,12 +8,15 @@ import { AuthContext } from "../../components/authProvider";
 import AuthComponent from "../../components/layout/authComp";
 import style from "../../../styles/profile.module.css";
 import Header from "../../components/layout/header";
+import Head from "next/head";
 
 function Home() {
   const authContext = React.useContext(AuthContext);
   const widget = (
     <>
-      <title>Home</title>
+      <Head>
+        <title>Home</title>
+      </Head>
       <Header pageName={"Home"} />
       <div className="" style={{ margin: "100px" }}>
         {/* This page displays only the events that the user is following */}
@@ -31,9 +34,9 @@ function Home() {
               </button>
               <ul className="dropdown-menu">
                 <li>
-                  <a className="dropdown-item text-light" href="#">
-                    Ongoing
-                  </a>
+                  <Link href="\home\future">
+                    <a className="dropdown-item text-light">Ongoing</a>
+                  </Link>
                 </li>
                 <li>
                   <a className="dropdown-item text-light" href="#">

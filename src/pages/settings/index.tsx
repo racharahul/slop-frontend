@@ -5,6 +5,7 @@ import Header from "../../components/layout/header";
 import api from "../../util/api";
 import User, { toUser } from "../../data/User";
 import UpdateUserForm from "../../components/forms/userUpdateForm";
+import Head from "next/head";
 
 function Settings() {
   const authContext = React.useContext(AuthContext);
@@ -38,9 +39,126 @@ function Settings() {
     <>{loading}</>
   ) : (
     <div className="root" style={{ margin: "100px" }}>
-      <title>Settings</title>
+      <Head>
+        <title>Home</title>
+      </Head>
       <Header pageName={"Settings"} />
-      <UpdateUserForm user={user} />
+
+      {/* NavTabs */}
+      <ul className="nav nav-tabs" id="myTab" role="tablist">
+        <li className="nav-item" role="presentation">
+          <button
+            className="nav-link active"
+            id="home-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#home-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="home-tab-pane"
+            aria-selected="true"
+          >
+            Edit Profile
+          </button>
+        </li>
+        <li className="nav-item" role="presentation">
+          <button
+            className="nav-link"
+            id="profile-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#profile-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="profile-tab-pane"
+            aria-selected="false"
+          >
+            Password
+          </button>
+        </li>
+        <li className="nav-item" role="presentation">
+          <button
+            className="nav-link"
+            id="contact-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#contact-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="contact-tab-pane"
+            aria-selected="false"
+          >
+            Ticket Form
+          </button>
+        </li>
+      </ul>
+      <div className="tab-content" id="myTabContent">
+        <div
+          className="tab-pane fade show active"
+          id="home-tab-pane"
+          role="tabpanel"
+          aria-labelledby="home-tab"
+          tabIndex="0"
+        >
+          <UpdateUserForm user={user} />
+        </div>
+        <div
+          className="tab-pane fade"
+          id="profile-tab-pane"
+          role="tabpanel"
+          aria-labelledby="profile-tab"
+          tabIndex="0"
+        >
+          <div className="card mt-4" style={{ width: "50rem" }}>
+            <form className="p-3">
+              <h4 className="mb-4">Change Password</h4>
+              <div className="mb-4">
+                <input
+                  type="password"
+                  placeholder="Old Password"
+                  className="form-control"
+                  id="exampleInputPassword1"
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="password"
+                  placeholder="New Password"
+                  className="form-control"
+                  id="exampleInputPassword1"
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="password"
+                  placeholder="Confirm Password"
+                  className="form-control"
+                  id="exampleInputPassword1"
+                />
+              </div>
+
+              <button type="submit" className="btn btn-primary">
+                Update
+              </button>
+            </form>
+          </div>
+        </div>
+        <div
+          className="tab-pane fade"
+          id="contact-tab-pane"
+          role="tabpanel"
+          aria-labelledby="contact-tab"
+          tabindex="0"
+        >
+          ...
+        </div>
+        <div
+          className="tab-pane fade"
+          id="disabled-tab-pane"
+          role="tabpanel"
+          aria-labelledby="disabled-tab"
+          tabindex="0"
+        >
+          ...
+        </div>
+      </div>
     </div>
   );
   return <AuthComponent child={widget} />;

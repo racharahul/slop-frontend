@@ -18,12 +18,15 @@ import React from "react";
 import { AuthContext } from "../../components/authProvider";
 import AuthComponent from "../../components/layout/authComp";
 import Header from "../../components/layout/header";
+import Head from "next/head";
 
 function Clubs() {
   const authContext = React.useContext(AuthContext);
   const widget = (
     <div className="root" style={{ margin: "100px" }}>
-      <title>Clubs</title>
+      <Head>
+        <title>Clubs</title>
+      </Head>
       <Header pageName={"Clubs"} />
       {/* Body start */}
 

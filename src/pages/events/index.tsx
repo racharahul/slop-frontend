@@ -19,6 +19,7 @@ import { toEventList } from "../../data/Event";
 import Event from "../../data/Event";
 import EventCard from "../../components/eventCard";
 import { NextPage } from "next";
+import Head from "next/head";
 
 const EventsPage: NextPage = () => {
   const authContext = React.useContext(AuthContext);
@@ -37,7 +38,9 @@ const EventsPage: NextPage = () => {
   }, []);
   const widget = (
     <div className="root" style={{ margin: "100px" }}>
-      <title>Events</title>
+      <Head>
+        <title>Events</title>
+      </Head>
       <Header pageName={"Events"} />
       {events.map((e) => (
         <EventCard event={e} key={e.id} setEvents={setEvents} />

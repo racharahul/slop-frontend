@@ -20,7 +20,7 @@ import Header from "../../components/layout/header";
 import UserProfileCard from "../../components/UserProfileCard";
 import Head from "next/head";
 import { height } from "@mui/system";
-import Codex from "../../../assets/Codex.png";
+import Codex from "../../../assets/CodeX.png";
 import kala from "../../../assets/kala.png";
 
 function Profile() {
@@ -102,7 +102,7 @@ function Profile() {
           id="home-tab-pane"
           role="tabpanel"
           aria-labelledby="home-tab"
-          tabIndex="0"
+          tabIndex={0}
         >
           <br />
 
@@ -176,7 +176,7 @@ function Profile() {
           id="profile-tab-pane"
           role="tabpanel"
           aria-labelledby="profile-tab"
-          tabIndex="0"
+          tabIndex={0}
         >
           <div className="card text-center mt-5" style={{ width: "100%" }}>
             <div className="card-body">
@@ -211,7 +211,7 @@ function Profile() {
           id="contact-tab-pane"
           role="tabpanel"
           aria-labelledby="contact-tab"
-          tabindex="0"
+          tabIndex={0}
         >
           ...
         </div>
@@ -220,7 +220,7 @@ function Profile() {
           id="disabled-tab-pane"
           role="tabpanel"
           aria-labelledby="disabled-tab"
-          tabindex="0"
+          tabIndex={0}
         >
           ...
         </div> */}

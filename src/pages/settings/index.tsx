@@ -95,7 +95,7 @@ function Settings() {
           id="home-tab-pane"
           role="tabpanel"
           aria-labelledby="home-tab"
-          tabIndex="0"
+          tabIndex={0}
         >
           <UpdateUserForm user={user} />
         </div>
@@ -104,7 +104,7 @@ function Settings() {
           id="profile-tab-pane"
           role="tabpanel"
           aria-labelledby="profile-tab"
-          tabIndex="0"
+          tabIndex={0}
         >
           <div className="card mt-4" style={{ width: "100%" }}>
             <form className="p-3">
@@ -145,7 +145,7 @@ function Settings() {
           id="contact-tab-pane"
           role="tabpanel"
           aria-labelledby="contact-tab"
-          tabindex="0"
+          tabIndex={0}
         >
           ...
         </div>
@@ -154,7 +154,7 @@ function Settings() {
           id="disabled-tab-pane"
           role="tabpanel"
           aria-labelledby="disabled-tab"
-          tabindex="0"
+          tabIndex={0}
         >
           ...
         </div>

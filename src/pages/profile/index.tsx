@@ -178,7 +178,7 @@ function Profile() {
           aria-labelledby="profile-tab"
           tabIndex="0"
         >
-          <div className="card text-center mt-5" style={{ width: "40rem" }}>
+          <div className="card text-center mt-5" style={{ width: "100%" }}>
             <div className="card-body">
               <h5 className="card-title">Card title</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
@@ -191,7 +191,7 @@ function Profile() {
               </a>
             </div>
           </div>
-          <div className="card text-center mt-5" style={{ width: "40rem" }}>
+          <div className="card text-center mt-5" style={{ width: "100%" }}>
             <div className="card-body">
               <h5 className="card-title">Card title</h5>
               <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>

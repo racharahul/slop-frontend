@@ -106,7 +106,7 @@ function Settings() {
           aria-labelledby="profile-tab"
           tabIndex="0"
         >
-          <div className="card mt-4" style={{ width: "50rem" }}>
+          <div className="card mt-4" style={{ width: "100%" }}>
             <form className="p-3">
               <h4 className="mb-4">Change Password</h4>
               <div className="mb-4">

@@ -45,7 +45,7 @@ const SignInForm: React.FC<Prop> = ({ style }) => {
       className="rounded-4 p-5 text-center"
       style={{ backgroundColor: "#f6fbf9" }}
     >
-      <h1>Let's Goo</h1>
+      <h1>Let`&lsquo;`s Goo</h1>
       <input
         className={style.input}
         type="email"

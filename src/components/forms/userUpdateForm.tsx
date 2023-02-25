@@ -32,7 +32,7 @@ const UpdateUserForm: React.FC<{ user: User }> = ({ user }) => {
     setErr(undefined);
   };
   const widget = (
-    <div className="card mt-4" style={{ width: "50rem" }}>
+    <div className="card mt-4" style={{ width: "100%" }}>
       <div className="m-4">
         <label htmlFor="FullName" className="form-label">
           Full Name

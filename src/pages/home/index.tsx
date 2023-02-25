@@ -58,7 +58,9 @@ function Home() {
           {/* Left Content */}
           <div className="row gx-5">
             <div className="col">
-              <div className="p-3">Left</div>
+              {/* LEFT */}
+              <div className="p-3"> </div>
+              {/* LEFT */}
             </div>
 
             {/* Card */}
@@ -66,17 +68,26 @@ function Home() {
               <div className="p-3">
                 <div className="card" style={{ width: "40rem" }}>
                   <div className="card-body">
-                    <h5 className="card-title">Card title</h5>
-                    <h6 className="card-subtitle mb-2 text-muted">
-                      Card subtitle
-                    </h6>
+                    <h1 className="card-text">
+                      <u>CodeX</u>
+                    </h1>
+                    <h5 className="card-title">CODE AGAINST TIME</h5>
                     <p className="card-text">
-                      Some quick example text to build on the card title and
-                      make up the bulk of the cards content.
+                      Do you know the program for the sum of two numbers, the
+                      minimum of two numbers, or reversing a string?🤔 Guess
+                      what? This is the difficulty level of questions
+                      participants will face in our CODEX: Code Against Time.
+                      Participants have to solve 50 basic coding problems in 90
+                      mins. Sounds fun, right?⏳ Do not know the basics of
+                      coding? It does not matter; it is an open book contest
+                      where participants can use any source online to get the
+                      solutions to the problems Register now for our coding
+                      contest and test your fundamentals of coding in any
+                      programming language 😇
                     </p>
-                    <a href="#" className="card-link">
-                      Card link
-                    </a>
+                    <Link href="">
+                      <a>Know More</a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -84,7 +95,9 @@ function Home() {
 
             {/* Right Content */}
             <div className="col">
-              <div className="p-3">Right</div>
+              {/* RIGHT */}
+              <div className="p-3"></div>
+              {/* RIGHT */}
             </div>
           </div>
         </div>

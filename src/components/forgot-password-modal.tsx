@@ -1,27 +1,58 @@
 import React from "react";
 import api from "../util/api";
-
+import * as yup from "yup";
+import { useRouter } from "next/router";
 export default function ForgotPasswordModal() {
   const [isOtpSent, setIsOtpSent] = React.useState<boolean>(false);
   const [otp, setOtp] = React.useState("");
   const [newPassword, setNewPassword] = React.useState<string>("");
   const [confirmPassword, setConfirmPassword] = React.useState<string>("");
   const [email, setEmail] = React.useState<string>("");
-  const otpIds = ["first", "second", "third", "fourth", "fifth", "sixth"];
+  const [loading, setLoading] = React.useState<boolean>(false);
+
   const onEmailSubmit = async () => {
-    const res = await api.post(`/auth/forgot-password?emailId=${email}}`);
+    if (!(await yup.string().required().email().isValid(email))) {
+      alert("Invalid email");
+      return;
+    }
+    const res = await api.post(`/auth/forgot-password?emailId=${email}`);
+    console.log(res.status);
     if (res.status === 200) {
       // send otp
       setIsOtpSent(true);
+    } else {
+      alert(res.data.message);
+    }
+  };
+  const onOtpSubmit = async () => {
+    if (!(await yup.string().min(6).required().isValid(otp))) {
+      alert("Invalid otp");
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+    const res = await api.put(`/auth/update-password?emailId=${email}`, {
+      otp,
+      password: newPassword,
+    });
+    console.log(res.status);
+    if (res.status === 200) {
+      alert("Password updated successfully");
+    } else {
+      alert(res.data.message);
     }
   };
   const OtpInput = () => {
     return (
       <div>
         <input
+          className="mb-2 form-control rounded"
           type="text"
           placeholder="OTP"
-          className="form-control mb-2"
+          value={otp}
+          maxLength={6}
           onChange={(e) => {
             const { value } = e.target;
             setOtp(value);
@@ -30,8 +61,7 @@ export default function ForgotPasswordModal() {
 
         <input
           type="password"
-          className="form-control "
-          id="exampleInputPassword1"
+          className="form-control"
           placeholder="New Password"
           onChange={(e) => {
             const { value } = e.target;
@@ -41,7 +71,6 @@ export default function ForgotPasswordModal() {
         <input
           type="password"
           className="form-control"
-          id="exampleInputPassword1"
           placeholder="Confirm New Password"
           onChange={(e) => {
             const { value } = e.target;
@@ -59,10 +88,11 @@ export default function ForgotPasswordModal() {
           <button
             type="button"
             className="btn btn-light"
-            onClick={() => {
+            onClick={async () => {
               console.log(
                 `${email}, ${otp}, ${newPassword}, ${confirmPassword}`
               );
+              await onOtpSubmit();
             }}
           >
             Save Changes
@@ -92,34 +122,44 @@ export default function ForgotPasswordModal() {
               </p>
             </h1>
           </div>
-          <div className="modal-body">
-            <div className="input-group mb-3">
-              <input
-                type="email"
-                className="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                placeholder="Enter email"
-                onChange={(e) => {
-                  const { value } = e.target;
-                  setEmail(value);
-                }}
-              />
-              <button
-                className="btn btn-outline-secondary"
-                type="button"
-                id="button-addon2"
-                disabled={isOtpSent}
-                onClick={onEmailSubmit}
-              >
-                Send OTP
-              </button>
-              <div className="btn btn-link" onClick={() => {}}>
-                Resend OTP
+          {loading ? (
+            <div className="spinner-border" />
+          ) : (
+            <div className="modal-body">
+              <div className="input-group mb-3">
+                <input
+                  type="email"
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                  defaultValue={email}
+                  disabled={isOtpSent}
+                  onChange={(e) => {
+                    const { value } = e.target;
+                    setEmail(value);
+                  }}
+                />
+                <button
+                  className="btn btn-outline-secondary"
+                  type="button"
+                  id="button-addon2"
+                  disabled={isOtpSent}
+                  onClick={async () => {
+                    setLoading(true);
+                    await onEmailSubmit();
+                    setLoading(false);
+                  }}
+                >
+                  Send OTP
+                </button>
+                <div className="btn btn-link" onClick={() => {}}>
+                  Resend OTP
+                </div>
+                {isOtpSent ? OtpInput() : <></>}
               </div>
-              {isOtpSent ? <OtpInput /> : <></>}
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

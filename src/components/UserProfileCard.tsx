@@ -53,6 +53,15 @@ const UserProfileCard: React.FC = () => {
         </div>
         <div className="col-md-8 mt-4">
           <div className="card-body">
+            <div className="position-relative">
+              <div className="position-absolute top-0 end-0">
+                <Link href="../settings">
+                  <a style={{ color: "black" }}>
+                    <FontAwesomeIcon icon={solid("gear")} size="1x" />
+                  </a>
+                </Link>
+              </div>
+            </div>
             <p className="fs-3">
               {user.fullName}
               {user.userRole !== "USER" ? (
@@ -68,15 +77,6 @@ const UserProfileCard: React.FC = () => {
               )}
             </p>
             <p className="card-title">{user.bio}</p>
-            <Link href="../settings">
-              <a style={{ color: "black" }}>
-                <FontAwesomeIcon
-                  className={style.settingsicon}
-                  icon={solid("gear")}
-                  size="1x"
-                />
-              </a>
-            </Link>
           </div>
         </div>
       </div>

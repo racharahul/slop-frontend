@@ -25,6 +25,7 @@ const SignUpForm: React.FC<Prop> = ({ style }) => {
     password: "",
     phoneNumber: "",
   });
+  const [confirmPassword, setConfirmPassword] = React.useState("");
   const [loading, setLoading] = React.useState<boolean>(false);
   const [err, setErr] = React.useState("");
   const validateData = async (data: FormType) => {
@@ -120,11 +121,26 @@ const SignUpForm: React.FC<Prop> = ({ style }) => {
       />
       <br />
       {err ? <div className="error-text">{err}</div> : <></>}
-      <br />
+      <input
+        className={style.input}
+        type="password"
+        placeholder="Confirm Password"
+        onChange={(e) => {
+          const value = e.target.value;
+          setConfirmPassword(value);
+        }}
+      />
 
+      <br />
+      {err ? <div className="error-text">{err}</div> : <></>}
+      <br />
       <button
         className={style.btn}
         onClick={async () => {
+          if (formVal.password !== confirmPassword) {
+            setErr("Passwords do not match");
+            return;
+          }
           setLoading(true);
           await onSubmit();
           setLoading(false);

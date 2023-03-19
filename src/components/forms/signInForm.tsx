@@ -5,6 +5,8 @@ import { ValidationError } from "yup";
 import api from "../../util/api";
 import { signInFormValidation } from "../../util/dataValidation";
 import { AuthContext } from "../authProvider";
+import { useState } from "react";
+import ForgotPasswordModal from "../forgot-password-modal";
 
 type Prop = {
   style: {
@@ -87,7 +89,19 @@ const SignInForm: React.FC<Prop> = ({ style }) => {
           "Sign In"
         )}
       </button>
+      <br />
+      {/* Button trigger modal  */}
+      <button
+        type="button"
+        className="btn btn-link"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Forgot Password?
+      </button>
 
+      {/* Modal */}
+      <ForgotPasswordModal />
       <p>
         Don`t Have An Account?
         <Link href="/auth/signup">

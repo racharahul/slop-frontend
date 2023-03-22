@@ -5,11 +5,13 @@ import FakeApiCall from "../../util/racha";
 import Image from "next/image";
 import gstudio from "../../../assets/gstudio.png";
 import Header from "../../components/layout/header";
+import EventCard from "../../components/eventCard";
+import EventCard2 from "../../components/eventCard2";
 
 function ClubHomePage() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-
+  const [dispState, setdispState] = useState("none");
   const router = useRouter();
   const [club, setClub] = useState<Club>();
   useEffect(() => {
@@ -29,6 +31,7 @@ function ClubHomePage() {
       }
       setLoading(false);
     });
+    (club!= undefined)?(club.noOfEvents!=0 ? setdispState("block"):setdispState("none")):setdispState("none")
   }, [router.isReady]);
   if (loading) return <h1>Loading...</h1>;
   if (error || !club) return <h1>Error {error}</h1>;
@@ -58,62 +61,70 @@ function ClubHomePage() {
         </div>
       </div>
 
-      <div>
-        {/* NavTabs */}
-        <ul className="nav nav-tabs" id="myTab" role="tablist">
-          <li className="nav-item" role="presentation">
-            <button
-              className="nav-link active"
-              id="home-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#home-tab-pane"
-              type="button"
-              role="tab"
-              aria-controls="home-tab-pane"
-              aria-selected="true"
+          {/* NavTabs */}
+          <ul className="nav nav-tabs" id="myTab" role="tablist">
+            <li className="nav-item" role="presentation">
+              <button
+                className="nav-link active"
+                id="home-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#home-tab-pane"
+                type="button"
+                role="tab"
+                aria-controls="home-tab-pane"
+                aria-selected="true"
+              >
+                Followers
+              </button>
+            </li>
+            <li className="nav-item" role="presentation">
+              <button
+                className="nav-link"
+                id="profile-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#profile-tab-pane"
+                type="button"
+                role="tab"
+                aria-controls="profile-tab-pane"
+                aria-selected="false"
+              >
+                Events <span style={{display : dispState}}>({club.noOfEvents})</span>
+              </button>
+            </li>
+          </ul>
+          <div className="tab-content" id="myTabContent">
+            <div
+              className="tab-pane fade show active"
+              id="home-tab-pane"
+              role="tabpanel"
+              aria-labelledby="home-tab"
+              tabIndex={0}
             >
-              Followers
-            </button>
-          </li>
-          <li className="nav-item" role="presentation">
-            <button
-              className="nav-link"
-              id="profile-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#profile-tab-pane"
-              type="button"
-              role="tab"
-              aria-controls="profile-tab-pane"
-              aria-selected="false"
+              followers content
+            </div>
+            <div
+              className="tab-pane fade "
+              id="profile-tab-pane"
+              role="tabpanel"
+              aria-labelledby="profile-tab"
+              tabIndex={0}
             >
-              Events
-            </button>
-          </li>
-        </ul>
-        <div className="tab-content" id="myTabContent">
-          <div
-            className="tab-pane fade show active"
-            id="home-tab-pane"
-            role="tabpanel"
-            aria-labelledby="home-tab"
-            tabIndex={0}
-          >
-            <div className="m-2">Hello</div>
+             <div className="container">
+               <div className='row'>
+                   {club.events.map((item,value)=>{
+                     return(
+                         <EventCard2 key ={item.eventName} event={item} />
+                     )
+                   })}
+               </div>
+             </div>
+            </div>
+
           </div>
-          <div
-            className="tab-pane fade"
-            id="profile-tab-pane"
-            role="tabpanel"
-            aria-labelledby="profile-tab"
-            tabIndex={0}
-          >
-            ...
-          </div>
-        </div>
 
         {/* NavTabs End */}
       </div>
-    </div>
+
   );
 }
 export default ClubHomePage;

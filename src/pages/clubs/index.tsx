@@ -97,7 +97,7 @@ function Clubs() {
               <p className="card-text">
                 We decide the vibe of photography, much more than just media 😌
               </p>
-              <Link href="/clubs/codex">
+              <Link href="/clubs/Gstudio">
                 <a href="#" className="btn btn-light">
                   More
                 </a>

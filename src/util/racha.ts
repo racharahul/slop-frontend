@@ -44,7 +44,7 @@ const clubs: Club[] = [
   },
 ];
 export default async function FakeApiCall(url: string, clubSlug: string) {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
+  await new Promise((resolve) => setTimeout(resolve, 100));
   const club = clubs.find(
     (club) => club.name.toLowerCase() === clubSlug.toLowerCase()
   );

@@ -48,9 +48,9 @@ function Clubs() {
                 This Club reveals and supports your passion for coding. It
                 builds up your strength about expressing yourself through it.
               </p>
-              <a href="#" className="btn btn-light">
-                More
-              </a>
+              <Link href="/clubs/CodeX">
+                <a className="btn btn-light">More</a>
+              </Link>
             </div>
           </div>
         </div>
@@ -64,9 +64,9 @@ function Clubs() {
                 Arts & entertainment Cultural club GITAM Bengaluru 🖤 | Dance |
                 Music |
               </p>
-              <a href="#" className="btn btn-light">
-                More
-              </a>
+              <Link href="/clubs/Kalakrithi">
+                <a className="btn btn-light">More</a>
+              </Link>
             </div>
           </div>
         </div>
@@ -78,9 +78,9 @@ function Clubs() {
               <h5 className="card-title">Gusac</h5>
               {/* eslint-disable-next-line react/no-unescaped-entities */}
               <p className="card-text">“तमसो मा ज्योतिर्गमय"</p>
-              <a href="#" className="btn btn-light">
-                More
-              </a>
+              <Link href="/clubs/Gusac">
+                <a className="btn btn-light">More</a>
+              </Link>
             </div>
           </div>
         </div>
@@ -98,9 +98,7 @@ function Clubs() {
                 We decide the vibe of photography, much more than just media 😌
               </p>
               <Link href="/clubs/Gstudio">
-                <a href="#" className="btn btn-light">
-                  More
-                </a>
+                <a className="btn btn-light">More</a>
               </Link>
             </div>
           </div>

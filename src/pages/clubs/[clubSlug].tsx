@@ -77,7 +77,7 @@ function ClubHomePage() {
               aria-labelledby="home-tab"
               tabIndex={0}
             >
-              ...
+              ....
             </div>
             <div
               className="tab-pane fade"

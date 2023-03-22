@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import type { Club } from "../../util/racha";
 import FakeApiCall from "../../util/racha";
 import Image from "next/image";
+import gstudio from "../../../assets/gstudio.png";
 import Header from "../../components/layout/header";
 import EventCard from "../../components/eventCard";
 import EventCard2 from "../../components/eventCard2";
@@ -30,20 +31,35 @@ function ClubHomePage() {
       }
       setLoading(false);
     });
-    (club)?(club.noOfEvents!=0 ? setdispState("block"):setdispState("none")):setdispState("none")
+    (club!= undefined)?(club.noOfEvents!=0 ? setdispState("block"):setdispState("none")):setdispState("none")
   }, [router.isReady]);
   if (loading) return <h1>Loading...</h1>;
   if (error || !club) return <h1>Error {error}</h1>;
   return (
     <div>
-      <Header pageName={club.name}/>
-      <br/>
-      <br/>
-      <br/>
-      <div className="card mb-3 m-2">
-        <div className="card-body">
-          <h5 className="card-title">{club.name}</h5>
-          <p className="card-text">{club.description}</p>
+      <Header pageName={club.name} />
+      <br />
+      <br />
+      <br />
+
+      <div className="card mb-3 m-3">
+        <div className="row g-0">
+          <div className="col-md-4">
+            <Image
+              style={{ height: "200px", width: "200px" }}
+              className="card-img-top"
+              src={gstudio}
+              alt="Card image cap"
+            ></Image>
+          </div>
+          <div className="col-md-8">
+            <div className="card-body">
+              <h1 className="card-title">{club.name}</h1>
+              <h6 className="card-text">{club.description}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
 
           {/* NavTabs */}
           <ul className="nav nav-tabs" id="myTab" role="tablist">
@@ -61,7 +77,7 @@ function ClubHomePage() {
                 Followers
               </button>
             </li>
-            <li className="nav-item " role="presentation">
+            <li className="nav-item" role="presentation">
               <button
                 className="nav-link"
                 id="profile-tab"
@@ -72,7 +88,7 @@ function ClubHomePage() {
                 aria-controls="profile-tab-pane"
                 aria-selected="false"
               >
-                Events<span style={{display: dispState , fontSize : "10px"}}>({club.noOfEvents})</span>
+                Events <span style={{display : dispState}}>({club.noOfEvents})</span>
               </button>
             </li>
           </ul>
@@ -84,47 +100,31 @@ function ClubHomePage() {
               aria-labelledby="home-tab"
               tabIndex={0}
             >
-              followers list
+              followers content
             </div>
             <div
-              className="tab-pane fade"
+              className="tab-pane fade "
               id="profile-tab-pane"
               role="tabpanel"
               aria-labelledby="profile-tab"
               tabIndex={0}
             >
-              <div>
-                {club.events.map((item, index) =>{
-                  return(
-                  <EventCard2 key = {item.eventName} event={item}></EventCard2>
-                  )
-                })}
-              </div>
+             <div className="container">
+               <div className='row'>
+                   {club.events.map((item,value)=>{
+                     return(
+                         <EventCard2 key ={item.eventName} event={item} />
+                     )
+                   })}
+               </div>
+             </div>
             </div>
-            <div
-              className="tab-pane fade"
-              id="contact-tab-pane"
-              role="tabpanel"
-              aria-labelledby="contact-tab"
-              tabIndex={0}
-            >
-              ...
-            </div>
-            <div
-              className="tab-pane fade"
-              id="disabled-tab-pane"
-              role="tabpanel"
-              aria-labelledby="disabled-tab"
-              tabIndex={0}
-            >
-              ...
-            </div>
+
           </div>
 
-          {/* NavTabs End */}
-        </div>
+        {/* NavTabs End */}
       </div>
-    </div>
+
   );
 }
 export default ClubHomePage;

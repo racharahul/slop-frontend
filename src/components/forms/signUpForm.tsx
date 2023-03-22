@@ -120,7 +120,7 @@ const SignUpForm: React.FC<Prop> = ({ style }) => {
         }}
       />
       <br />
-      {err ? <div className="error-text">{err}</div> : <></>}
+      {/* {err ? <div className="error-text">{err}</div> : <></>} */}
       <input
         className={style.input}
         type="password"

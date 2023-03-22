@@ -4,11 +4,13 @@ import type { Club } from "../../util/racha";
 import FakeApiCall from "../../util/racha";
 import Image from "next/image";
 import Header from "../../components/layout/header";
+import EventCard from "../../components/eventCard";
+import EventCard2 from "../../components/eventCard2";
 
 function ClubHomePage() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-
+  const [dispState, setdispState] = useState("none");
   const router = useRouter();
   const [club, setClub] = useState<Club>();
   useEffect(() => {
@@ -28,11 +30,16 @@ function ClubHomePage() {
       }
       setLoading(false);
     });
+    (club)?(club.noOfEvents!=0 ? setdispState("block"):setdispState("none")):setdispState("none")
   }, [router.isReady]);
   if (loading) return <h1>Loading...</h1>;
   if (error || !club) return <h1>Error {error}</h1>;
   return (
     <div>
+      <Header pageName={club.name}/>
+      <br/>
+      <br/>
+      <br/>
       <div className="card mb-3 m-2">
         <div className="card-body">
           <h5 className="card-title">{club.name}</h5>
@@ -54,7 +61,7 @@ function ClubHomePage() {
                 Followers
               </button>
             </li>
-            <li className="nav-item" role="presentation">
+            <li className="nav-item " role="presentation">
               <button
                 className="nav-link"
                 id="profile-tab"
@@ -65,7 +72,7 @@ function ClubHomePage() {
                 aria-controls="profile-tab-pane"
                 aria-selected="false"
               >
-                Events
+                Events<span style={{display: dispState , fontSize : "10px"}}>({club.noOfEvents})</span>
               </button>
             </li>
           </ul>
@@ -77,7 +84,7 @@ function ClubHomePage() {
               aria-labelledby="home-tab"
               tabIndex={0}
             >
-              ....
+              followers list
             </div>
             <div
               className="tab-pane fade"
@@ -86,7 +93,13 @@ function ClubHomePage() {
               aria-labelledby="profile-tab"
               tabIndex={0}
             >
-              ...
+              <div>
+                {club.events.map((item, index) =>{
+                  return(
+                  <EventCard2 key = {item.eventName} event={item}></EventCard2>
+                  )
+                })}
+              </div>
             </div>
             <div
               className="tab-pane fade"

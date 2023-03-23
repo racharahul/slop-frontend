@@ -3,20 +3,74 @@ import Image from "next/image";
 import Script from "next/script";
 import student from "../../../assets/student.png";
 import user from "../../../assets/user.png";
-import React, { useState } from "react";
-import { Post } from "../../components/Post";
+import React, { useEffect, useState } from "react";
+import { EventPost } from "../../components/Post";
 import { AuthContext } from "../../components/authProvider";
 import AuthComponent from "../../components/layout/authComp";
 import style from "../../../styles/profile.module.css";
 import Header from "../../components/layout/header";
 import Head from "next/head";
+import api from "@/util/api";
+import { HomeFeed, Event } from "@/types/HomeFeed";
 
 function Home() {
   const [isActive, setIsActive] = useState(false);
-  const handleClick = () => {
-    setIsActive(!isActive);
-  };
+
   const authContext = React.useContext(AuthContext);
+  const [events, setEvents] = React.useState<Event[]>();
+  const [originalEvents, setOriginalEvents] = React.useState<Event[]>(); // This is used to store the original events array when the user sorts the events by likes
+  useEffect(() => {
+    api
+      .get(`/users/${authContext.userId}/feed`, {
+        headers: { Authorization: `Bearer ${authContext.authState}` },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          const data: HomeFeed = res.data;
+          setEvents(
+            data.events.map((event) => {
+              return {
+                ...event,
+                createdAt: new Date(event.createdAt),
+              };
+            })
+          );
+          setOriginalEvents(
+            data.events.map((event) => {
+              return {
+                ...event,
+                createdAt: new Date(event.createdAt),
+              };
+            })
+          );
+          console.log(events);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  useEffect(() => {
+    setEvents((prevEvents) => {
+      if (!isActive) return originalEvents;
+      if (prevEvents) {
+        console.log("sorting");
+        console.log(
+          prevEvents.sort((a, b) => {
+            if (b.numberOfLikes === a.numberOfLikes)
+              return b.numberOfAttendees - a.numberOfAttendees;
+            return b.numberOfLikes - a.numberOfLikes;
+          })
+        );
+        return [...prevEvents].sort((a, b) => {
+          if (b.numberOfLikes === a.numberOfLikes)
+            return b.numberOfAttendees - a.numberOfAttendees;
+          return b.numberOfLikes - a.numberOfLikes;
+        });
+      }
+      return prevEvents;
+    });
+  }, [isActive]);
   const widget = (
     <>
       <Head>
@@ -55,8 +109,8 @@ function Home() {
                 </li>
               </ul>
               <button
-                className={`btn ${isActive ? "btn-light" : "btn-primary"}`}
-                onClick={handleClick}
+                className={`btn ${isActive ? "btn-light" : "btn-outline-dark"}`}
+                onClick={() => setIsActive(!isActive)}
               >
                 Hot
               </button>
@@ -72,9 +126,19 @@ function Home() {
               <div className="p-3"> </div>
               {/* LEFT */}
             </div>
-
-            {/* Card */}
-            <Post />
+            <div className="col">
+              {events ? (
+                events.map((event) => (
+                  <EventPost
+                    event={event}
+                    key={event.slug}
+                    setEvents={setEvents}
+                  />
+                ))
+              ) : (
+                <>Loading</>
+              )}
+            </div>
 
             {/* Right Content */}
             <div className="col">

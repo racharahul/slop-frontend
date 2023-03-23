@@ -4,6 +4,7 @@ import Script from "next/script";
 import student from "../../../assets/student.png";
 import user from "../../../assets/user.png";
 import React from "react";
+import {Post} from "../../components/Post";
 import { AuthContext } from "../../components/authProvider";
 import AuthComponent from "../../components/layout/authComp";
 import style from "../../../styles/profile.module.css";
@@ -64,34 +65,7 @@ function Home() {
             </div>
 
             {/* Card */}
-            <div className="col">
-              <div className="p-3">
-                <div className="card" style={{ width: "40rem" }}>
-                  <div className="card-body">
-                    <h1 className="card-text">
-                      <u>CodeX</u>
-                    </h1>
-                    <h5 className="card-title">CODE AGAINST TIME</h5>
-                    <p className="card-text">
-                      Do you know the program for the sum of two numbers, the
-                      minimum of two numbers, or reversing a string?🤔 Guess
-                      what? This is the difficulty level of questions
-                      participants will face in our CODEX: Code Against Time.
-                      Participants have to solve 50 basic coding problems in 90
-                      mins. Sounds fun, right?⏳ Do not know the basics of
-                      coding? It does not matter; it is an open book contest
-                      where participants can use any source online to get the
-                      solutions to the problems Register now for our coding
-                      contest and test your fundamentals of coding in any
-                      programming language 😇
-                    </p>
-                    <Link href="">
-                      <a>Know More</a>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Post/>
 
             {/* Right Content */}
             <div className="col">

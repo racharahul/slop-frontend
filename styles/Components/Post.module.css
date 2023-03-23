@@ -1,0 +1,69 @@
+.container{
+    border-radius: 6px;
+    box-shadow: 3px 5px 10px rgba(128, 128, 128, 0.537);
+    max-width: 540px;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.header{
+    display: flex;
+    padding-top: 5px;
+    border-bottom: solid rgba(0, 0, 0, 0.46) 1px;
+    margin-bottom: 5px;
+}
+.sender{
+    display: flex;
+    align-items: center;
+}
+.icon{
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+}
+.timestamp{
+    color: rgba(0, 0, 0, 0.46);
+    align-items: center;
+    font-weight: 500;
+}
+.stats{
+    display: flex;
+    position: relative;
+    top:-20px;
+    color: rgba(0, 0, 0, 0.25);
+    justify-content: space-between;
+    padding: 0 20px 0 20px;
+    border-bottom: solid rgba(0, 0, 0, 0.46) 1px;
+
+}
+.liked{
+    color: red;
+    font-size: 20px;
+}
+.buttons{
+    margin-top: -20px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid rgba(0, 0, 0, 0.46) 1px;
+}
+.buttons button{
+    background: none;
+    border: none;
+    padding: 10px 30px 10px 30px;
+}
+.btntext{
+    position: relative;
+    top: -5px;
+    margin-left: 5px;
+}
+.description{
+    padding: 5px;
+    text-align: left;
+}
+.footer{
+    padding: 0;
+    margin: 0;
+}
+

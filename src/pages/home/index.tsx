@@ -34,7 +34,7 @@ function Home() {
               </button>
               <ul className="dropdown-menu">
                 <li>
-                  <Link href="\home\future">
+                  <Link href="/home/future">
                     <a className="dropdown-item text-light">Ongoing</a>
                   </Link>
                 </li>

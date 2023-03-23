@@ -123,7 +123,11 @@ export default function ForgotPasswordModal() {
             </h1>
           </div>
           {loading ? (
-            <div className="spinner-border" />
+            <div className="d-flex justify-content-center m-5">
+              <div className="spinner-grow text-light" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
           ) : (
             <div className="modal-body">
               <div className="input-group mb-3">
@@ -153,7 +157,12 @@ export default function ForgotPasswordModal() {
                 >
                   Send OTP
                 </button>
-                <div className="btn btn-link" onClick={() => {}}>
+                <div
+                  className="btn btn-link"
+                  onClick={() => {
+                    setIsOtpSent(false);
+                  }}
+                >
                   Resend OTP
                 </div>
                 {isOtpSent ? OtpInput() : <></>}

@@ -1,106 +1,59 @@
-import Link from "next/link";
-import Image from "next/image";
-import Script from "next/script";
-import student from "../../../assets/student.png";
-import user from "../../../assets/user.png";
-import CodeX from "../../../assets/CodeX.png";
-import kala from "../../../assets/kala.png";
-import gusac from "../../../assets/gusac.png";
-import gstudio from "../../../assets/gstudio.png";
-import FakeApiCall, {Club} from "../../util/racha";
-import React, {useEffect, useState} from "react";
+import Club, { toClubList } from "../../data/Club";
+import React, { ReactNode, useEffect, useState } from "react";
 import { AuthContext } from "../../components/authProvider";
 import AuthComponent from "../../components/layout/authComp";
 import Header from "../../components/layout/header";
 import Head from "next/head";
+import api from "../../util/api";
+import Image from "next/image";
 
 function Clubs() {
+  const authContext = React.useContext(AuthContext);
+  const [clubs, setClubs] = useState<Club[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    api
+      .get("/clubs", {
+        headers: { Authorization: `Bearer ${authContext.authState}` },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          const clubs = toClubList(res.data.clubs);
+          console.log(clubs);
+          setClubs(() => [...clubs]);
+        } else {
+          console.log("error", res);
+          alert(JSON.stringify(res));
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   const widget = (
-    <div className="root" style={{ margin: "100px" }}>
+    <>
       <Head>
         <title>Clubs</title>
       </Head>
       <Header pageName={"Clubs"} />
-      {/* Body start */}
-
-      <style jsx>{`
-        .card {
-          width: 18rem;
-          height: 30rem;
-        }
-      `}</style>
-
-      <div className="row row-cols-1 row-cols-md-4 g-4 m-3">
-        {/*{club.map((item))}*/}
-        <div className="col">
-          <div className="card">
-            <Image className="card-img-top" src={CodeX} alt="Card image cap" />
-            <div className="card-body">
-              <h5 className="card-title">CodeX</h5>
-              <p className="card-text">
-                This Club reveals and supports your passion for coding. It
-                builds up your strength about expressing yourself through it.
-              </p>
-              <Link href="/clubs/CodeX">
-                <a className="btn btn-light">More</a>
-              </Link>
-            </div>
-          </div>
+      {clubs.map((club) => (
+        <div key={club.clubSlug}>
+          <h1>{club.clubName}</h1>
+          <h2>{club.clubSlug}</h2>
+          <h3>{club.clubDescription}</h3>
+          <Image
+            src={`http://localhost:8080/api/images/${club.profilePicture}`}
+            width={100}
+            height={100}
+          />
         </div>
-        {/* Kalakrithi Card */}
-        <div className="col">
-          <div className="card">
-            <Image className="card-img-top" src={kala} alt="Card image cap" />
-            <div className="card-body">
-              <h5 className="card-title">Kalakrithi</h5>
-              <p className="card-text">
-                Arts & entertainment Cultural club GITAM Bengaluru 🖤 | Dance |
-                Music |
-              </p>
-              <Link href="/clubs/Kalakrithi">
-                <a className="btn btn-light">More</a>
-              </Link>
-            </div>
-          </div>
-        </div>
-        {/* Gusac Card */}
-        <div className="col">
-          <div className="card">
-            <Image className="card-img-top" src={gusac} alt="Card image cap" />
-            <div className="card-body">
-              <h5 className="card-title">Gusac</h5>
-              {/* eslint-disable-next-line react/no-unescaped-entities */}
-              <p className="card-text">“तमसो मा ज्योतिर्गमय"</p>
-              <Link href="/clubs/Gusac">
-                <a className="btn btn-light">More</a>
-              </Link>
-            </div>
-          </div>
-        </div>
-        {/* Gstudio Card */}
-        <div className="col">
-          <div className="card">
-            <Image
-              className="card-img-top"
-              src={gstudio}
-              alt="Card image cap"
-            />
-            <div className="card-body">
-              <h5 className="card-title">Gstudio</h5>
-              <p className="card-text">
-                We decide the vibe of photography, much more than just media 😌
-              </p>
-              <Link href="/clubs/Gstudio">
-                <a className="btn btn-light">More</a>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      ))}
+    </>
   );
-  return <AuthComponent child={widget} />;
+  return <AuthComponent child={loading ? <h1>Loading</h1> : widget} />;
 }
 
 export default Clubs;

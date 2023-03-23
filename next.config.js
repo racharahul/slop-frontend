@@ -6,8 +6,8 @@ const nextConfig = {
     SLOP_API_URL: process.env.SLOP_API_URL,
   },
   images: {
-      domains: ['d1csarkz8obe9u.cloudfront.net'],
-    }
+    domains: ["d1csarkz8obe9u.cloudfront.net", "localhost"],
+  },
 };
 
 module.exports = nextConfig;

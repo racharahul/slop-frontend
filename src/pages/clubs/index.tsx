@@ -6,6 +6,7 @@ import Header from "../../components/layout/header";
 import Head from "next/head";
 import api from "../../util/api";
 import Image from "next/image";
+import Link from "next/link";
 
 function Clubs() {
   const authContext = React.useContext(AuthContext);
@@ -39,18 +40,24 @@ function Clubs() {
         <title>Clubs</title>
       </Head>
       <Header pageName={"Clubs"} />
-      {clubs.map((club) => (
-        <div key={club.clubSlug}>
-          <h1>{club.clubName}</h1>
-          <h2>{club.clubSlug}</h2>
-          <h3>{club.clubDescription}</h3>
-          <Image
-            src={`http://localhost:8080/api/images/${club.profilePicture}`}
-            width={100}
-            height={100}
-          />
+      <br/>
+      <br/>
+      <br/>
+        <div className="row mx-3">
+            {clubs.map((club) => (
+                <Link href={`/clubs/${club.clubSlug}`} key={club.clubSlug}>
+                    <a className="card my-2 mx-4 col" style={{maxWidth: "18rem", textDecoration:"none" ,color:"inherit"}}>
+                        <Image width={"100px"} height={"150px"} className="card-img-top" src={`http://localhost:8080/api/images/${club.profilePicture}`} alt="Card image cap"/>
+                        <div className="card-body">
+                            <h5 className="card-title">{club.clubName}</h5>
+                            <p className="card-text">{club.clubDescription}</p>
+                        </div>
+
+                    </a>
+                </Link>
+            ))}
         </div>
-      ))}
+
     </>
   );
   return <AuthComponent child={loading ? <h1>Loading</h1> : widget} />;

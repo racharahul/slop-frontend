@@ -3,8 +3,8 @@ import Image from "next/image";
 import Script from "next/script";
 import student from "../../../assets/student.png";
 import user from "../../../assets/user.png";
-import React from "react";
-import {Post} from "../../components/Post";
+import React, { useState } from "react";
+import { Post } from "../../components/Post";
 import { AuthContext } from "../../components/authProvider";
 import AuthComponent from "../../components/layout/authComp";
 import style from "../../../styles/profile.module.css";
@@ -12,6 +12,10 @@ import Header from "../../components/layout/header";
 import Head from "next/head";
 
 function Home() {
+  const [isActive, setIsActive] = useState(false);
+  const handleClick = () => {
+    setIsActive(!isActive);
+  };
   const authContext = React.useContext(AuthContext);
   const widget = (
     <>
@@ -50,7 +54,12 @@ function Home() {
                   </a>
                 </li>
               </ul>
-              <button className="btn btn-light px-5">Hot</button>
+              <button
+                className={`btn ${isActive ? "btn-light" : "btn-primary"}`}
+                onClick={handleClick}
+              >
+                Hot
+              </button>
             </div>
           </div>
         </div>
@@ -65,7 +74,7 @@ function Home() {
             </div>
 
             {/* Card */}
-            <Post/>
+            <Post />
 
             {/* Right Content */}
             <div className="col">

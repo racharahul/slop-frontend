@@ -7,21 +7,15 @@ import CodeX from "../../../assets/CodeX.png";
 import kala from "../../../assets/kala.png";
 import gusac from "../../../assets/gusac.png";
 import gstudio from "../../../assets/gstudio.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  solid,
-  regular,
-  brands,
-  icon,
-} from "@fortawesome/fontawesome-svg-core/import.macro";
-import React from "react";
+import FakeApiCall, {Club} from "../../util/racha";
+import React, {useEffect, useState} from "react";
 import { AuthContext } from "../../components/authProvider";
 import AuthComponent from "../../components/layout/authComp";
 import Header from "../../components/layout/header";
 import Head from "next/head";
 
 function Clubs() {
-  const authContext = React.useContext(AuthContext);
+
   const widget = (
     <div className="root" style={{ margin: "100px" }}>
       <Head>
@@ -38,7 +32,7 @@ function Clubs() {
       `}</style>
 
       <div className="row row-cols-1 row-cols-md-4 g-4 m-3">
-        {/* CodeX Card */}
+        {/*{club.map((item))}*/}
         <div className="col">
           <div className="card">
             <Image className="card-img-top" src={CodeX} alt="Card image cap" />

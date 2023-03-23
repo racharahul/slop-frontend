@@ -53,7 +53,7 @@ function FileUpload() {
         canvas.toBlob(async (blob) => {
           // Create a new FormData object with the resized image and additional form data
           const newFormData = new FormData();
-          newFormData.append("file", blob, "photo.png");
+          newFormData.append("file", blob ?? "", "photo.png");
           newFormData.append("name", "John Doe");
           // Add any additional form data here
 
@@ -66,8 +66,7 @@ function FileUpload() {
           console.log(response.data);
         }, "image/png");
       };
-
-      img.src = URL.createObjectURL(file);
+      if (file) img.src = URL.createObjectURL(file);
     } catch (error) {
       console.log(error);
     }

@@ -12,8 +12,21 @@ function ClubHomePage() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [dispState, setdispState] = useState("none");
+  const [ follow, setFollow] = useState("Follow")
+  const [followUI, setFollowUI] = useState("btn btn-outline-primary")
   const router = useRouter();
   const [club, setClub] = useState<Club>();
+  const FollowHandle = () =>{
+    if(follow==="Follow")
+    {
+      setFollow("Unfollow");
+      setFollowUI("btn btn-outline-dark")
+    }
+    else{
+      setFollow("Follow");
+      setFollowUI("btn btn-outline-primary")
+    }
+  }
   useEffect(() => {
     if (!router.isReady) return;
     console.log("res");
@@ -35,6 +48,7 @@ function ClubHomePage() {
   }, [router.isReady]);
   if (loading) return <h1>Loading...</h1>;
   if (error || !club) return <h1>Error {error}</h1>;
+
   return (
     <div>
       <Header pageName={club.name} />
@@ -56,6 +70,7 @@ function ClubHomePage() {
             <div className="card-body">
               <h1 className="card-title">{club.name}</h1>
               <h6 className="card-text">{club.description}</h6>
+              <button className={followUI} onClick={FollowHandle}>{follow}</button>
             </div>
           </div>
         </div>
@@ -103,7 +118,7 @@ function ClubHomePage() {
               followers content
             </div>
             <div
-              className="tab-pane fade "
+              className="tab-pane fade show active "
               id="profile-tab-pane"
               role="tabpanel"
               aria-labelledby="profile-tab"

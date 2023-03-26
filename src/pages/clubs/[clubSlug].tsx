@@ -12,21 +12,19 @@ function ClubHomePage() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [dispState, setdispState] = useState("none");
-  const [ follow, setFollow] = useState("Follow")
-  const [followUI, setFollowUI] = useState("btn btn-outline-primary")
+  const [follow, setFollow] = useState("Follow");
+  const [followUI, setFollowUI] = useState("btn btn-outline-primary");
   const router = useRouter();
   const [club, setClub] = useState<Club>();
-  const FollowHandle = () =>{
-    if(follow==="Follow")
-    {
+  const FollowHandle = () => {
+    if (follow === "Follow") {
       setFollow("Unfollow");
-      setFollowUI("btn btn-outline-dark")
-    }
-    else{
+      setFollowUI("btn btn-outline-dark");
+    } else {
       setFollow("Follow");
-      setFollowUI("btn btn-outline-primary")
+      setFollowUI("btn btn-outline-primary");
     }
-  }
+  };
   useEffect(() => {
     if (!router.isReady) return;
     console.log("res");
@@ -44,7 +42,11 @@ function ClubHomePage() {
       }
       setLoading(false);
     });
-    (club!= undefined)?(club.noOfEvents!=0 ? setdispState("block"):setdispState("none")):setdispState("none")
+    club != undefined
+      ? club.noOfEvents != 0
+        ? setdispState("block")
+        : setdispState("none")
+      : setdispState("none");
   }, [router.isReady]);
   if (loading) return <h1>Loading...</h1>;
   if (error || !club) return <h1>Error {error}</h1>;
@@ -70,76 +72,75 @@ function ClubHomePage() {
             <div className="card-body">
               <h1 className="card-title">{club.name}</h1>
               <h6 className="card-text">{club.description}</h6>
-              <button className={followUI} onClick={FollowHandle}>{follow}</button>
+              <button className={followUI} onClick={FollowHandle}>
+                {follow}
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-          {/* NavTabs */}
-          <ul className="nav nav-tabs" id="myTab" role="tablist">
-            <li className="nav-item" role="presentation">
-              <button
-                className="nav-link active"
-                id="home-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#home-tab-pane"
-                type="button"
-                role="tab"
-                aria-controls="home-tab-pane"
-                aria-selected="true"
-              >
-                Followers
-              </button>
-            </li>
-            <li className="nav-item" role="presentation">
-              <button
-                className="nav-link"
-                id="profile-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#profile-tab-pane"
-                type="button"
-                role="tab"
-                aria-controls="profile-tab-pane"
-                aria-selected="false"
-              >
-                Events <span style={{display : dispState}}>({club.noOfEvents})</span>
-              </button>
-            </li>
-          </ul>
-          <div className="tab-content" id="myTabContent">
-            <div
-              className="tab-pane fade show active"
-              id="home-tab-pane"
-              role="tabpanel"
-              aria-labelledby="home-tab"
-              tabIndex={0}
-            >
-              followers content
+      {/* NavTabs */}
+      <ul className="nav nav-tabs" id="myTab" role="tablist">
+        <li className="nav-item" role="presentation">
+          <button
+            className="nav-link active"
+            id="home-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#home-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="home-tab-pane"
+            aria-selected="true"
+          >
+            Followers
+          </button>
+        </li>
+        <li className="nav-item" role="presentation">
+          <button
+            className="nav-link"
+            id="profile-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#profile-tab-pane"
+            type="button"
+            role="tab"
+            aria-controls="profile-tab-pane"
+            aria-selected="false"
+          >
+            Events{" "}
+            <span style={{ display: dispState }}>({club.noOfEvents})</span>
+          </button>
+        </li>
+      </ul>
+      <div className="tab-content" id="myTabContent">
+        <div
+          className="tab-pane fade show active"
+          id="home-tab-pane"
+          role="tabpanel"
+          aria-labelledby="home-tab"
+          tabIndex={0}
+        >
+          followers content
+        </div>
+        <div
+          className="tab-pane fade show active "
+          id="profile-tab-pane"
+          role="tabpanel"
+          aria-labelledby="profile-tab"
+          tabIndex={0}
+        >
+          <div className="container">
+            <div className="row">
+              {club.events.map((item, value) => {
+                return <EventCard2 key={item.eventName} event={item} />;
+              })}
             </div>
-            <div
-              className="tab-pane fade show active "
-              id="profile-tab-pane"
-              role="tabpanel"
-              aria-labelledby="profile-tab"
-              tabIndex={0}
-            >
-             <div className="container">
-               <div className='row'>
-                   {club.events.map((item,value)=>{
-                     return(
-                         <EventCard2 key ={item.eventName} event={item} />
-                     )
-                   })}
-               </div>
-             </div>
-            </div>
-
           </div>
-
-        {/* NavTabs End */}
+        </div>
       </div>
 
+      {/* NavTabs End */}
+    </div>
   );
 }
 export default ClubHomePage;

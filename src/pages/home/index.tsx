@@ -43,7 +43,6 @@ function Home() {
               };
             })
           );
-          console.log(events);
         }
       })
       .catch((err) => {
@@ -54,14 +53,6 @@ function Home() {
     setEvents((prevEvents) => {
       if (!isActive) return originalEvents;
       if (prevEvents) {
-        console.log("sorting");
-        console.log(
-          prevEvents.sort((a, b) => {
-            if (b.numberOfLikes === a.numberOfLikes)
-              return b.numberOfAttendees - a.numberOfAttendees;
-            return b.numberOfLikes - a.numberOfLikes;
-          })
-        );
         return [...prevEvents].sort((a, b) => {
           if (b.numberOfLikes === a.numberOfLikes)
             return b.numberOfAttendees - a.numberOfAttendees;
@@ -71,6 +62,10 @@ function Home() {
       return prevEvents;
     });
   }, [isActive]);
+  // useEffect(() => {
+  //   console.log(isActive);
+  //   console.log(events?.map((event) => event.numberOfLikes));
+  // }, [events]);
   const widget = (
     <>
       <Head>
@@ -120,7 +115,7 @@ function Home() {
 
         <div className="container-md px-4 text-center">
           {/* Left Content */}
-          <div className="row gx-5">
+          <div className="row gx-8">
             <div className="col">
               {/* LEFT */}
               <div className="p-3"> </div>

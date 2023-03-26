@@ -3,13 +3,15 @@ import styles from "../../styles/Components/Post.module.css";
 import img from "../../assets/CodeX.png";
 import poster from "../../assets/poster.jpg";
 import Image from "next/image";
-import heart from "../../assets/heart-thin-icon.svg";
-import reg from "../../assets/plus-round-line-icon.svg";
+import likeIcon from "../../assets/heart-thin-icon.svg";
+import registerIcon from "../../assets/plus-round-line-icon.svg";
+import LikedIcon from "../../assets/heart-icon.svg";
 import share from "../../assets/instagram-share-icon.svg";
 import type { HomeFeed, Event } from "@/types/HomeFeed";
 import api from "../util/api";
 import { AuthContext } from "./authProvider";
 import Link from "next/link";
+import { getImageLink } from "@/util/image";
 
 export const EventPost: React.FC<{
   event: Event;
@@ -19,10 +21,7 @@ export const EventPost: React.FC<{
   const [event, setEvent] = useState(defEvent);
   const getDaysAgo = (date: Date) => {
     const diff = new Date().getTime() - date.getTime();
-    return Math.round(diff / (1000 * 60 * 60 * 24));
-  };
-  const getImageLink = (imageName: string) => {
-    return `http://localhost:8080/api/images/${imageName}`;
+    return `${Math.round(diff / (1000 * 60 * 60 * 24))}d ago`;
   };
   const onUserEventInteraction = async (
     eventSlug: string,
@@ -110,7 +109,11 @@ export const EventPost: React.FC<{
               await onUserEventInteraction(event.slug, "LIKED", !event.liked)
             }
           >
-            <Image src={heart} width={"20px"} height={"20px"} />{" "}
+            <Image
+              src={event.liked ? LikedIcon : likeIcon}
+              width={"20px"}
+              height={"20px"}
+            />{" "}
             <span className={styles.btntext}>Like</span>
           </button>
           <button
@@ -122,7 +125,7 @@ export const EventPost: React.FC<{
               )
             }
           >
-            <Image src={reg} width={"20px"} height={"20px"} />{" "}
+            <Image src={registerIcon} width={"20px"} height={"20px"} />{" "}
             <span className={styles.btntext}>Register</span>
           </button>
           <button

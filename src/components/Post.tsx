@@ -88,11 +88,15 @@ export const EventPost: React.FC<{
         </div>
       </div>
       <div className={styles.poster}>
-        <Image
-          src={getImageLink(event.poster)}
-          width={"400px"}
-          height={"400px"}
-        />
+        <Link href={`/events/${event.slug}`}>
+          <a>
+            <Image
+              src={getImageLink(event.poster)}
+              width={"400px"}
+              height={"400px"}
+            />
+          </a>
+        </Link>
       </div>
       <div className={styles.stats}>
         <p className={styles.likecount}>

@@ -7,6 +7,7 @@ import Event, { toEvent } from "../../../data/Event";
 import ReactMarkdown from "react-markdown";
 import Countdown from "react-countdown";
 import moment from "moment";
+import Link from "next/link";
 
 function EventViewPage() {
   const authContext = React.useContext(AuthContext);
@@ -35,8 +36,12 @@ function EventViewPage() {
       <div className="card m-5">
         <div className="text-center">
           <h1>{event.name}</h1>
-          <h4>{event.eventCreators[0].fullName}</h4>
-          <p>Registered Users {event.registeredUsers.length} </p>
+          <Link href={`/clubs/${event.clubSlug}`}>
+            <a>
+              <h4>{event.clubName}</h4>
+            </a>
+          </Link>
+          <p>Registered Users {event.numberOfRegistrations} </p>
 
           <hr />
           <button className="btn btn-success">

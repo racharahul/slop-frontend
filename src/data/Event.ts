@@ -12,6 +12,7 @@ export default class Event {
   descriptionMd: string;
 
   slug: string;
+  poster: string;
 
   @Transform(({ value }) => {
     if (value === null) return undefined;
@@ -24,10 +25,17 @@ export default class Event {
     return moment(value);
   })
   endTime?: Moment | undefined;
+  numberOfLikes: number;
+  numberOfRegistrations: number;
+  numberOfShares: number;
+  clubName: string;
+  clubSlug: string;
+  clubProfilePicture: string;
+  registered: boolean;
+  liked: boolean;
+  // eventCreators: User[];
 
-  eventCreators: User[];
-
-  registeredUsers: User[];
+  // registeredUsers: User[];
 
   briefDescription: string;
 }

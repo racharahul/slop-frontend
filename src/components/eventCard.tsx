@@ -133,7 +133,7 @@ const EventCard: React.FC<{
               <div className="col">
                 <h5>Event Registrations</h5>
               </div>
-              <div className="col">{event.registeredUsers.length}</div>
+              <div className="col">{event.numberOfRegistrations}</div>
             </div>
           </div>
         </div>

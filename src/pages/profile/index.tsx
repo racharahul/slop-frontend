@@ -22,17 +22,43 @@ import Head from "next/head";
 import { height } from "@mui/system";
 import Codex from "../../../assets/CodeX.png";
 import kala from "../../../assets/kala.png";
+import api from "@/util/api";
+import User, { toUser } from "@/data/User";
+import { getImageLink } from "@/util/image";
+import { EventPost } from "@/components/Post";
+import Event from "@/data/Event";
 
 function Profile() {
   const authContext = React.useContext(AuthContext);
-  const widget = (
+  const [user, setUser] = React.useState<User>(undefined!);
+  React.useEffect(() => {
+    console.log("Use Effect");
+    api
+      .get("/users/getUser", {
+        headers: { Authorization: `Bearer ${authContext.authState}` },
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          setUser(toUser(res.data));
+          console.log(user);
+        } else {
+          console.log("error");
+        }
+      })
+      .catch((err) => {
+        console.log("error");
+        console.error(err);
+      });
+  }, []);
+  const widget = user ? (
     <div className="root" style={{ margin: "100px" }}>
       <Head>
         <title>Profile</title>
       </Head>
       <Header pageName={"Profile"} />
       {/* Profile Card */}
-      <UserProfileCard />
+      <UserProfileCard user={user} />
 
       <hr />
 
@@ -63,7 +89,7 @@ function Profile() {
             aria-controls="profile-tab-pane"
             aria-selected="false"
           >
-            Events Attended
+            Events Registered
           </button>
         </li>
         {/* <li className="nav-item" role="presentation">
@@ -108,68 +134,35 @@ function Profile() {
 
           <div className="container text-center">
             <div className="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-              <div className="col">
-                <div className="p-3">
-                  <div
-                    className=" card text-center"
-                    style={{ width: "10rem", height: "10rem" }}
-                  >
-                    <Image src={Codex} className="card-img-top" alt="" />
-                    <div className="card-body">
-                      <p className="card-text">
-                        <Link href={""}>
-                          <a>Codex</a>
-                        </Link>
-                      </p>
+              {user.clubsFollowedByUser.map((club) => {
+                return (
+                  <div className="col" key={club.clubSlug}>
+                    <div className="p-3">
+                      <div
+                        className=" card text-center"
+                        // style={{ width: "10rem", height: "10rem" }}
+                      >
+                        <Image
+                          src={getImageLink(club.profilePicture)}
+                          className="card-img-top"
+                          width={500}
+                          height={500}
+                          alt=""
+                        />
+                        <div className="card-body">
+                          <p className="card-text">
+                            <Link href={`/clubs/${club.clubSlug}`}>
+                              <a>{club.clubName}</a>
+                            </Link>
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="p-3">
-                  <div
-                    className=" card text-center"
-                    style={{ width: "10rem", height: "10rem" }}
-                  >
-                    <Image src={kala} className="card-img-top" alt="" />
-                    <div className="card-body">
-                      <p className="card-text">
-                        <Link href={""}>
-                          <a>Kalakruthi</a>
-                        </Link>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
-
-          {/* <div className="container px-4 text-center">
-            <div className="row gx-5">
-              <div>
-                <div
-                  className=" card text-center"
-                  style={{ width: "10rem", height: "10rem" }}
-                >
-                  <Image src={Codex} className="card-img-top" alt="" />
-                  <div className="card-body">
-                    <p className="card-text">Codex</p>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className=" card text-center"
-                style={{ width: "10rem", height: "10rem" }}
-              >
-                <Image src={Codex} className="card-img-top" alt="" />
-                <div className="card-body">
-                  <p className="card-text">Codex</p>
-                </div>
-              </div>
-            </div>
-          </div> */}
         </div>
         <div
           className="tab-pane fade"
@@ -178,32 +171,9 @@ function Profile() {
           aria-labelledby="profile-tab"
           tabIndex={0}
         >
-          <div className="card text-center mt-5" style={{ width: "100%" }}>
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p className="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the cards content.
-              </p>
-              <a href="#" className="card-link">
-                Card link
-              </a>
-            </div>
-          </div>
-          <div className="card text-center mt-5" style={{ width: "100%" }}>
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p className="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the cards content.
-              </p>
-              <a href="#" className="card-link">
-                Card link
-              </a>
-            </div>
-          </div>
+          {user.eventsRegisteredByUser.map((event) => {
+            return <EventPost event={event} key={event.slug} />;
+          })}
         </div>
 
         {/* <div
@@ -226,6 +196,8 @@ function Profile() {
         </div> */}
       </div>
     </div>
+  ) : (
+    <>Loadin</>
   );
   return <AuthComponent child={widget} />;
 }

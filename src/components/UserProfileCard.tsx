@@ -17,39 +17,27 @@ import React from "react";
 import { AuthContext } from "./authProvider";
 import User, { toUser } from "../data/User";
 import api from "../util/api";
+import { getImageLink } from "@/util/image";
 
-const UserProfileCard: React.FC = () => {
-  const authContext = React.useContext(AuthContext);
-  const [user, setUser] = React.useState<User>(undefined!);
-  React.useEffect(() => {
-    console.log("Use Effect");
-    api
-      .get("/users/getUser", {
-        headers: { Authorization: `Bearer ${authContext.authState}` },
-      })
-      .then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          setUser(toUser(res.data));
-          console.log(user);
-        } else {
-          console.log("error");
-        }
-      })
-      .catch((err) => {
-        console.log("error");
-        console.error(err);
-      });
-  }, []);
-  const widget = user ? (
+const UserProfileCard: React.FC<{ user: User }> = ({ user }) => {
+  const widget = (
     <div className="container card mt-5">
       <div className="row g-0">
         <div className="col-md-4">
-          <FontAwesomeIcon
-            className="displayimage p-5"
-            icon={solid("user")}
-            size="7x"
-          />
+          {user.profilePicture ? (
+            <Image
+              src={getImageLink(user.profilePicture)}
+              alt="user profile pic"
+              height={500}
+              width={500}
+            />
+          ) : (
+            <FontAwesomeIcon
+              className="displayimage p-5"
+              icon={solid("user")}
+              size="7x"
+            />
+          )}
         </div>
         <div className="col-md-8 mt-4">
           <div className="card-body">
@@ -81,8 +69,6 @@ const UserProfileCard: React.FC = () => {
         </div>
       </div>
     </div>
-  ) : (
-    <></>
   );
   return widget;
 };

@@ -86,14 +86,6 @@ function FileUpload() {
           aria-describedby="button-addon2"
           onChange={handleFileChange}
         />
-        <button
-          className="btn btn-outline-light"
-          type="button"
-          id="button-addon2"
-          onClick={handleSubmit}
-        >
-          Button
-        </button>
       </div>
     </div>
   );

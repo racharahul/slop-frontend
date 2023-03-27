@@ -25,6 +25,8 @@ import kala from "../../../assets/kala.png";
 import api from "@/util/api";
 import User, { toUser } from "@/data/User";
 import { getImageLink } from "@/util/image";
+import { EventPost } from "@/components/Post";
+import Event from "@/data/Event";
 
 function Profile() {
   const authContext = React.useContext(AuthContext);
@@ -87,7 +89,7 @@ function Profile() {
             aria-controls="profile-tab-pane"
             aria-selected="false"
           >
-            Events Attended
+            Events Registered
           </button>
         </li>
         {/* <li className="nav-item" role="presentation">
@@ -138,13 +140,13 @@ function Profile() {
                     <div className="p-3">
                       <div
                         className=" card text-center"
-                        style={{ width: "10rem", height: "10rem" }}
+                        // style={{ width: "10rem", height: "10rem" }}
                       >
                         <Image
                           src={getImageLink(club.profilePicture)}
                           className="card-img-top"
-                          width={100}
-                          height={200}
+                          width={500}
+                          height={500}
                           alt=""
                         />
                         <div className="card-body">
@@ -169,32 +171,9 @@ function Profile() {
           aria-labelledby="profile-tab"
           tabIndex={0}
         >
-          <div className="card text-center mt-5" style={{ width: "100%" }}>
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p className="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the cards content.
-              </p>
-              <a href="#" className="card-link">
-                Card link
-              </a>
-            </div>
-          </div>
-          <div className="card text-center mt-5" style={{ width: "100%" }}>
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p className="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the cards content.
-              </p>
-              <a href="#" className="card-link">
-                Card link
-              </a>
-            </div>
-          </div>
+          {user.eventsRegisteredByUser.map((event) => {
+            return <EventPost event={event} key={event.slug} />;
+          })}
         </div>
 
         {/* <div

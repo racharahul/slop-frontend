@@ -14,6 +14,9 @@ export default class Event {
   slug: string;
   poster: string;
 
+  @Transform(({ value }) => moment(value))
+  createdAt: Moment;
+
   @Transform(({ value }) => {
     if (value === null) return undefined;
     return moment(value);
@@ -28,6 +31,7 @@ export default class Event {
   numberOfLikes: number;
   numberOfRegistrations: number;
   numberOfShares: number;
+  numberOfAttendees: number;
   clubName: string;
   clubSlug: string;
   clubProfilePicture: string;

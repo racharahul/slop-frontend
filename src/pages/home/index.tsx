@@ -11,7 +11,7 @@ import style from "../../../styles/profile.module.css";
 import Header from "../../components/layout/header";
 import Head from "next/head";
 import api from "@/util/api";
-import { HomeFeed, Event } from "@/types/HomeFeed";
+import Event, { toEventList } from "@/data/Event";
 
 function Home() {
   const [isActive, setIsActive] = useState(false);
@@ -26,23 +26,10 @@ function Home() {
       })
       .then((res) => {
         if (res.status === 200) {
-          const data: HomeFeed = res.data;
-          setEvents(
-            data.events.map((event) => {
-              return {
-                ...event,
-                createdAt: new Date(event.createdAt),
-              };
-            })
-          );
-          setOriginalEvents(
-            data.events.map((event) => {
-              return {
-                ...event,
-                createdAt: new Date(event.createdAt),
-              };
-            })
-          );
+          const data = res.data;
+          const eventList = toEventList(data.events);
+          setEvents(eventList);
+          setOriginalEvents(eventList);
         }
       })
       .catch((err) => {
@@ -124,11 +111,7 @@ function Home() {
             <div className="col">
               {events ? (
                 events.map((event) => (
-                  <EventPost
-                    event={event}
-                    key={event.slug}
-                    setEvents={setEvents}
-                  />
+                  <EventPost event={event} key={event.slug} />
                 ))
               ) : (
                 <>Loading</>

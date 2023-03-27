@@ -7,20 +7,20 @@ import likeIcon from "../../assets/heart-thin-icon.svg";
 import registerIcon from "../../assets/plus-round-line-icon.svg";
 import LikedIcon from "../../assets/heart-icon.svg";
 import share from "../../assets/instagram-share-icon.svg";
-import type { HomeFeed, Event } from "@/types/HomeFeed";
+import Event from "@/data/Event";
 import api from "../util/api";
 import { AuthContext } from "./authProvider";
 import Link from "next/link";
 import { getImageLink } from "@/util/image";
+import { Moment } from "moment";
 
 export const EventPost: React.FC<{
   event: Event;
-  setEvents: React.Dispatch<React.SetStateAction<Event[] | undefined>>;
 }> = ({ event: defEvent }) => {
   const authContext = React.useContext(AuthContext);
   const [event, setEvent] = useState(defEvent);
-  const getDaysAgo = (date: Date) => {
-    const diff = new Date().getTime() - date.getTime();
+  const getDaysAgo = (date: Moment) => {
+    const diff = new Date().getTime() - date.toDate().getTime();
     return `${Math.round(diff / (1000 * 60 * 60 * 24))}d ago`;
   };
   const onUserEventInteraction = async (

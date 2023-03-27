@@ -171,9 +171,11 @@ function Profile() {
           aria-labelledby="profile-tab"
           tabIndex={0}
         >
-          {user.eventsRegisteredByUser.map((event) => {
-            return <EventPost event={event} key={event.slug} />;
-          })}
+          <div style={{ marginLeft: "400px" }}>
+            {user.eventsRegisteredByUser.map((event) => {
+              return <EventPost event={event} key={event.slug} />;
+            })}
+          </div>
         </div>
 
         {/* <div
